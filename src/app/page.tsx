@@ -10,6 +10,8 @@ import { motion } from "framer-motion";
 
 import { ThreeDMarquee } from "@/components/ui/3d-marquee";
 
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
+
 import { 
   IconHome, 
   IconInfoCircle, 
@@ -22,6 +24,7 @@ import {
   IconBuilding 
 } from "@tabler/icons-react";
 import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
+import { TabularTechStack } from "@/components/ui/tabular-tech-stack";
 
 const items = [
   { title: "Home", icon: <IconHome />, href: "/" },
@@ -290,20 +293,20 @@ export default function Home() {
         </div>
 
         {/* Sticky Scroll Section with Left Box */}
-        <div className="w-full bg-indigo-50 py-20">
+        <div className="w-full bg-[#162F62] py-20">
 
-        <h2 className="text-4xl font-bold text-indigo-900 mb-8 text-center">What / How We Provide</h2>
+          <h2 className="text-4xl font-bold text-white mb-8 text-center">What / How We Provide</h2>
 
           <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-start gap-10">
             {/* Left Box */}
-            <div className="flex-1 bg-indigo-100 rounded-lg p-8 shadow-md flex flex-col justify-center items-center h-[30rem]">
-              <h3 className="text-3xl font-bold text-indigo-900 mb-4 text-center">Check out our AI services</h3>
+            <div className="flex-1 bg-gray-100 rounded-lg p-8 shadow-md flex flex-col justify-center items-center h-[30rem]">
+          <h3 className="text-3xl font-bold text-black mb-4 text-center">Check out our AI services</h3>
               <p className="text-gray-700 mb-6 text-center">
-                Discover how our cutting-edge AI solutions can transform your business. From predictive analytics to intelligent automation, we have you covered.
+          Discover how our cutting-edge AI solutions can transform your business. From predictive analytics to intelligent automation, we have you covered.
               </p>
               <Button className="text-lg px-6 py-4 bg-white text-indigo-900 hover:bg-indigo-200" variant="outline">
-                Learn More
-                <ArrowRight className="ml-3 h-5 w-5" />
+          Learn More
+          <ArrowRight className="ml-3 h-5 w-5" />
               </Button>
             </div>
 
@@ -333,6 +336,48 @@ export default function Home() {
               </motion.div>
             ))}
           </div>
+        </div>
+
+        {/* Tabular Tech Stack Section */}
+        <div className="w-full bg-gray-200 py-20">
+          <h2 className="text-4xl font-bold text-indigo-900 mb-12 text-center">Our Tech Stack</h2>
+          <TabularTechStack />
+        </div>
+
+        {/* Testimonials Section */}
+        <div className="w-full bg-[#162F62] py-8">
+          <h2 className="text-4xl font-bold text-white mb-6 text-center">What Our Clients Say</h2>
+          <div className="max-w-7xl mx-auto px-4">
+            <div className="h-[22rem] rounded-2xl flex flex-col antialiased bg-[#1e3b78]/90 dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+              <style jsx global>{`
+                @keyframes scroll {
+                  0% {
+                    transform: translateX(0);
+                  }
+                  100% {
+                    transform: translateX(calc(-100% - 1rem));
+                  }
+                }
+                .animate-scroll {
+                  animation: scroll var(--animation-duration, 40s) var(--animation-direction, forwards) linear infinite;
+                }
+                .scroller:hover .animate-scroll {
+                  animation-play-state: paused;
+                }
+              `}</style>
+              <InfiniteMovingCards
+                items={testimonials}
+                direction="right"
+                speed="slow"
+              />
+            </div>
+          </div>
+        </div>
+        
+        {/* Tabular Tech Stack Section */}
+        <div className="w-full bg-white py-20">
+          <h2 className="text-4xl font-bold text-indigo-900 mb-12 text-center">Why Us?</h2>
+          
         </div>
 
       </main>
