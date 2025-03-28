@@ -70,13 +70,15 @@ export const StickyScroll = ({
       <div className="div relative flex items-start px-4">
         <div className="max-w-2xl">
           {content.map((item, index) => (
-            <div key={item.title + index} className="my-16">
+            <div key={item.title + index} className="my-8"> {/* Reduced vertical margin */}
               <motion.h2
                 initial={{
                   opacity: 0,
+                  y: 20, // Adjusted starting position to move text up
                 }}
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
+                  y: activeCard === index ? 0 : 10, // Adjusted animation position
                 }}
                 className="text-2xl font-bold text-slate-900"
               >
@@ -85,11 +87,13 @@ export const StickyScroll = ({
               <motion.p
                 initial={{
                   opacity: 0,
+                  y: 20, // Adjusted starting position to move text up
                 }}
                 animate={{
                   opacity: activeCard === index ? 1 : 0.3,
+                  y: activeCard === index ? 0 : 10, // Adjusted animation position
                 }}
-                className="text-kg mt-6 max-w-sm text-slate-700"
+                className="text-kg mt-4 max-w-sm text-slate-700" // Reduced top margin
               >
                 {item.description}
               </motion.p>
@@ -101,7 +105,7 @@ export const StickyScroll = ({
       <div
         style={{ background: backgroundGradient }}
         className={cn(
-          "sticky top-10 hidden h-60 w-80 overflow-hidden rounded-md bg-white lg:block",
+          "sticky top-1/2 transform -translate-y-1/2 hidden h-60 w-80 overflow-hidden rounded-md bg-white lg:block", // Centered vertically
           contentClassName,
         )}
       >

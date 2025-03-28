@@ -293,25 +293,25 @@ export default function Home() {
         </div>
 
         {/* Sticky Scroll Section with Left Box */}
-        <div className="w-full bg-[#162F62] py-20">
+        <div className="w-full bg-[#162F62] py-12"> {/* Reduced vertical padding */}
 
-          <h2 className="text-4xl font-bold text-white mb-8 text-center">What / How We Provide</h2>
+          <h2 className="text-4xl font-bold text-white mb-6 text-center">What / How We Provide</h2> {/* Reduced bottom margin */}
 
-          <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-start gap-10">
+          <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-start gap-6"> {/* Reduced gap */}
             {/* Left Box */}
-            <div className="flex-1 bg-gray-100 rounded-lg p-8 shadow-md flex flex-col justify-center items-center h-[30rem]">
-          <h3 className="text-3xl font-bold text-black mb-4 text-center">Check out our AI services</h3>
-              <p className="text-gray-700 mb-6 text-center">
+            <div className="flex-1 bg-gray-100 rounded-lg p-6 shadow-md flex flex-col justify-center items-center h-[20rem]"> {/* Reduced height and padding */}
+              <h3 className="text-3xl font-bold text-black mb-4 text-center">Check out our AI services</h3>
+              <p className="text-gray-700 mb-4 text-center"> {/* Reduced bottom margin */}
           Discover how our cutting-edge AI solutions can transform your business. From predictive analytics to intelligent automation, we have you covered.
               </p>
-              <Button className="text-lg px-6 py-4 bg-white text-indigo-900 hover:bg-indigo-200" variant="outline">
+              <Button className="text-lg px-6 py-3 bg-white text-indigo-900 hover:bg-indigo-200" variant="outline"> {/* Adjusted button padding */}
           Learn More
           <ArrowRight className="ml-3 h-5 w-5" />
               </Button>
             </div>
 
             {/* Sticky Scroll Component */}
-            <div className="flex-1 h-[30rem] shadow-md rounded-lg">
+            <div className="flex-1 h-[20rem] shadow-md rounded-lg"> {/* Reduced height */}
               <StickyScroll content={content} />
             </div>
           </div>
@@ -374,11 +374,70 @@ export default function Home() {
           </div>
         </div>
         
-        {/* Tabular Tech Stack Section */}
-        <div className="w-full bg-white py-20">
-          <h2 className="text-4xl font-bold text-indigo-900 mb-12 text-center">Why Us?</h2>
-          
+        {/* Why Us Section */}
+<div className="w-full bg-white py-20">
+  <h2 className="text-4xl font-bold text-indigo-900 mb-12 text-center">Why Us?</h2>
+  
+  <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-10">
+    {/* Left side text content */}
+    <div className="flex-1">
+      <h3 className="text-3xl font-bold text-indigo-900 mb-6">We Deliver Excellence</h3>
+      <p className="text-gray-700 mb-4">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim.
+      </p>
+      <p className="text-gray-700 mb-4">
+        Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.
+      </p>
+      <p className="text-gray-700 mb-8">
+        Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
+      </p>
+      <Button className="px-6 py-3 bg-indigo-600 text-white hover:bg-indigo-700">
+        Learn More
+        <ArrowRight className="ml-2 h-4 w-4" />
+      </Button>
+    </div>
+    
+    {/* Right side image with animated border */}
+    <div className="flex-1 flex justify-center items-center">
+      <motion.div
+        className="relative p-2 rounded-lg"
+        initial={{ borderRadius: "25%" }}
+      >
+        <motion.div
+          className="absolute inset-0 rounded-lg"
+          animate={{
+            background: [
+              "linear-gradient(90deg, #007CF0, #00DFD8)",
+              "linear-gradient(180deg, #7928CA, #FF0080)",
+              "linear-gradient(270deg, #FF4D4D, #F9CB28)",
+              "linear-gradient(90deg, #007CF0, #00DFD8)"
+            ],
+            boxShadow: [
+              "0 0 10px rgba(0,124,240,0.5)",
+              "0 0 10px rgba(121,40,202,0.5)",
+              "0 0 10px rgba(255,77,77,0.5)",
+              "0 0 10px rgba(0,124,240,0.5)"
+            ]
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            repeatType: "loop"
+          }}
+        />
+        <div className="relative z-10 overflow-hidden rounded-lg shadow-xl">
+          <Image
+            src="https://assets.aceternity.com/cloudinary_bkp/3d-card.png"
+            alt="Why Choose Us"
+            width={500}
+            height={350}
+            className="object-cover"
+          />
         </div>
+      </motion.div>
+    </div>
+  </div>
+</div>
 
       </main>
       
