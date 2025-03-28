@@ -3,7 +3,7 @@
 import Image from "next/image";
 import { HoveredLink, Menu, MenuItem, ProductItem } from "@/components/ui/navbar-menu";
 import { cn } from "@/lib/utils";
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
 import { motion } from "framer-motion";
@@ -22,7 +22,6 @@ import {
   IconBuilding 
 } from "@tabler/icons-react";
 import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
-import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
 const items = [
   { title: "Home", icon: <IconHome />, href: "/" },
@@ -68,19 +67,19 @@ const marqueeImages = [
 ];
 
 const companyLogos = [
-  "https://via.placeholder.com/150x50?text=Logo1",
-  "https://via.placeholder.com/150x50?text=Logo2",
-  "https://via.placeholder.com/150x50?text=Logo3",
-  "https://via.placeholder.com/150x50?text=Logo4",
-  "https://via.placeholder.com/150x50?text=Logo5",
-  "https://via.placeholder.com/150x50?text=Logo6",
-  "https://via.placeholder.com/150x50?text=Logo7",
-
+  "https://cdn-icons-png.flaticon.com/128/731/731985.png",
+"https://cdn-icons-png.flaticon.com/128/5969/5969205.png",
+"https://cdn-icons-png.flaticon.com/128/5968/5968830.png",
+"https://cdn-icons-png.flaticon.com/128/5968/5968812.png",
+"https://cdn-icons-png.flaticon.com/128/11865/11865338.png",
+"https://cdn-icons-png.flaticon.com/128/5969/5969323.png",
+"https://cdn-icons-png.flaticon.com/128/4494/4494624.png",
+"https://cdn-icons-png.flaticon.com/128/5968/5968759.png",
 ];
 
 const content = [
   {
-    title: "Collaborative Editing",
+    title: "Project Lifecycle Management",
     description:
       "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
     content: (
@@ -90,7 +89,7 @@ const content = [
     ),
   },
   {
-    title: "Real time changes",
+    title: "Managed IT",
     description:
       "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
     content: (
@@ -106,7 +105,7 @@ const content = [
     ),
   },
   {
-    title: "Version control",
+    title: "MENDIX Development",
     description:
       "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
     content: (
@@ -115,16 +114,7 @@ const content = [
       </div>
     ),
   },
-  {
-    title: "Running out of content",
-    description:
-      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
-    content: (
-      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
-        Running out of content
-      </div>
-    ),
-  },
+  
 ];
 
 const testimonials = [
@@ -159,61 +149,94 @@ const testimonials = [
   },
 ];
 
+const statistics = [
+  { title: "Projects Completed", value: "120+", description: "Successfully delivered over 120 projects to clients worldwide." },
+  { title: "Active Clients", value: "50+", description: "Currently working with over 50 active clients globally." },
+  { title: "Team Members", value: "200+", description: "A strong team of over 200 skilled professionals." },
+  { title: "Years of Experience", value: "10+", description: "Over a decade of experience in delivering IT solutions." },
+  { title: "Global Reach", value: "15 Countries", description: "Providing services to clients in 15 different countries." },
+  { title: "Customer Satisfaction", value: "98%", description: "Achieved a 98% customer satisfaction rate." },
+];
+
 export default function Home() {
+  const companiesRef = useRef<HTMLDivElement>(null);
+  const contentAboveRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const adjustPositions = () => {
+      if (companiesRef.current && contentAboveRef.current) {
+        const windowHeight = window.innerHeight;
+        const companiesHeight = companiesRef.current.offsetHeight;
+        const contentAboveHeight = windowHeight - companiesHeight;
+
+        // Adjust the height of the div above the companies section
+        contentAboveRef.current.style.height = `${contentAboveHeight}px`;
+      }
+    };
+
+    adjustPositions();
+    window.addEventListener("resize", adjustPositions);
+
+    return () => {
+      window.removeEventListener("resize", adjustPositions);
+    };
+  }, []);
+
   return (
     <div className="relative min-h-[200vh]">
       <Navbar className="top-2" />
       
       {/* Main content container */}
       <main className="relative z-10">
-        {/* Hero section with 3D Marquee background */}
-        <div className="relative h-[90vh] flex flex-col items-center justify-center overflow-hidden"> {/* Reduced height */}
-          {/* Solid background color */}
-          <div className="absolute inset-0 bg-[#162F62] z-0"></div>
-          
-          {/* 3D Marquee Background with overlay */}
-          <div className="absolute inset-0 z-[1]">
-            {/* Semi-transparent overlay */}
-            <div className="absolute inset-0 bg-indigo-900/30 z-[1] mix-blend-multiply"></div>
+        {/* Hero section */}
+        <div ref={contentAboveRef} className="relative w-full">
+          <div className="relative h-[90vh] flex flex-col items-center justify-center overflow-hidden"> {/* Reduced height */}
+            {/* Solid background color */}
+            <div className="absolute inset-0 bg-[#162F62] z-0"></div>
             
-            {/* 3D Marquee component */}
+            {/* 3D Marquee Background with overlay */}
             <div className="absolute inset-0 z-[1]">
-              <ThreeDMarquee 
-                images={marqueeImages} 
-                className="h-full filter blur-[1px] opacity-60 brightness-75 contrast-75"
-              />
+              {/* Semi-transparent overlay */}
+              <div className="absolute inset-0 bg-indigo-900/30 z-[1] mix-blend-multiply"></div>
+              
+              {/* 3D Marquee component */}
+              <div className="absolute inset-0 z-[1]">
+                <ThreeDMarquee 
+                  images={marqueeImages} 
+                  className="h-full filter blur-[1px] opacity-60 brightness-75 contrast-75"
+                />
+              </div>
             </div>
-          </div>
-          
-          {/* Content overlay */}
-          <div className="relative z-10 flex flex-col items-center w-full max-w-7xl mx-auto px-4 text-center">
-            {/* Frosted glass backdrop for text */}
-            <div className="absolute inset-0 -mx- -my-12 bg-gray-800/40 backdrop-blur-sm rounded-xl shadow-lg"></div>
             
-            <h1 className="relative z-10 text-5xl sm:text-9xl font-bold text-white">PLMITPro</h1>
-            <p className="relative z-10 text-3xl font-bold text-indigo-200 mt-4">
-              Empowering your Enterprise through<br/>
-              Seamless Software Implementation
-            </p>
+            {/* Content overlay */}
+            <div className="relative z-10 flex flex-col items-center w-full max-w-7xl mx-auto px-4 text-center">
+              {/* Frosted glass backdrop for text */}
+              <div className="absolute inset-0 -mx- -my-12 bg-gray-800/40 backdrop-blur-sm rounded-xl shadow-lg"></div>
+              
+              <h1 className="relative z-10 text-5xl sm:text-9xl font-bold text-white">PLMITPro</h1>
+              <p className="relative z-10 text-3xl font-bold text-indigo-200 mt-4">
+                Empowering your Enterprise through<br/>
+                Seamless Software Implementation
+              </p>
 
-            <Button className="relative z-10 mt-12 text-lg px-10 py-7 mx-auto bg-white text-indigo-900 hover:bg-indigo-100" variant="outline">
-              View Our Services
-              <ArrowRight className="ml-3 h-5 w-5" />
-            </Button>
+              <Button className="relative z-10 mt-12 text-lg px-10 py-7 mx-auto bg-white text-indigo-900 hover:bg-indigo-100" variant="outline">
+                View Our Services
+                <ArrowRight className="ml-3 h-5 w-5" />
+              </Button>
+            </div>
           </div>
         </div>
 
-        {/* Slim div for company logos */}
-        <div className="w-full bg-gray-100 py-8">
-          <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-7">
-            {companyLogos.map((logo, index) => (
-              <img
-                key={index}
-                src={logo}
-                alt={`Company Logo ${index + 1}`}
-                className="h-12 object-contain"
-              />
-            ))}
+        {/* Company Logos Carousel */}
+        <div
+          ref={companiesRef}
+          className="w-full bg-gray-100 pt-7 pb-8" // Changed from py-8 to pt-4 pb-8
+        >
+          <div className="max-w-7xl mx-auto px-4">
+            <h3 className="text-center text-lg font-semibold text-gray-700 mb-4 mt-6"> {/* Added mt-6 for more top margin */}
+              Companies We Have Worked With
+            </h3>
+            <CompanyLogosCarousel logos={companyLogos} />
           </div>
         </div>
               
@@ -268,6 +291,9 @@ export default function Home() {
 
         {/* Sticky Scroll Section with Left Box */}
         <div className="w-full bg-indigo-50 py-20">
+
+        <h2 className="text-4xl font-bold text-indigo-900 mb-8 text-center">What / How We Provide</h2>
+
           <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-start gap-10">
             {/* Left Box */}
             <div className="flex-1 bg-indigo-100 rounded-lg p-8 shadow-md flex flex-col justify-center items-center h-[30rem]">
@@ -285,6 +311,27 @@ export default function Home() {
             <div className="flex-1 h-[30rem] shadow-md rounded-lg">
               <StickyScroll content={content} />
             </div>
+          </div>
+        </div>
+
+        {/* Statistics Section */}
+        <div className="w-full bg-white py-20">
+          <h2 className="text-4xl font-bold text-indigo-900 mb-12 text-center">Statistics on our development services</h2>
+          <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            {statistics.map((stat, index) => (
+              <motion.div
+                key={index}
+                whileHover={{
+                  scale: 1.05,
+                  boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
+                }}
+                transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                className="relative bg-indigo-100 rounded-lg p-6 shadow-md text-center"
+              >
+                <h3 className="text-2xl font-bold text-indigo-900">{stat.value}</h3>
+                <p className="text-gray-700 mt-2">{stat.title}</p>
+              </motion.div>
+            ))}
           </div>
         </div>
 
@@ -431,6 +478,86 @@ function Navbar({ className }: { className?: string }) {
 
 
       </Menu>
+    </div>
+  );
+}
+
+function CompanyLogosCarousel({ logos }: { logos: string[] }) {
+  // Triple the array to ensure we have enough logos for a smooth continuous loop
+  const extendedLogos = [...logos, ...logos, ...logos];
+
+  return (
+    <div className="relative overflow-hidden w-full py-2">
+      <div className="flex whitespace-nowrap">
+        {/* First animation container */}
+        <motion.div
+          className="flex space-x-6"
+          animate={{
+            x: "-100%"
+          }}
+          transition={{
+            repeat: Infinity,
+            duration: 40, // Slower animation
+            ease: "linear",
+            repeatType: "loop",
+            repeatDelay: 0
+          }}
+          style={{
+            willChange: "transform" // Performance optimization
+          }}
+        >
+          {extendedLogos.map((logo, index) => (
+            <div
+              key={`logo-1-${index}`}
+              className="flex-shrink-0 w-24 h-10 flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity"
+            >
+              <Image
+                src={logo}
+                alt={`Company Logo ${index + 1}`}
+                width={70}
+                height={25}
+                className="object-contain max-h-full max-w-full"
+              />
+            </div>
+          ))}
+        </motion.div>
+        
+        {/* Second animation container that seamlessly continues where the first one ends */}
+        <motion.div
+          className="flex space-x-6 absolute left-0"
+          initial={{ x: "100%" }}
+          animate={{ x: "0%" }}
+          transition={{
+            repeat: Infinity,
+            duration: 40, // Same duration
+            ease: "linear",
+            repeatType: "loop",
+            repeatDelay: 0
+          }}
+          style={{
+            willChange: "transform" // Performance optimization
+          }}
+        >
+          {extendedLogos.map((logo, index) => (
+            <div
+              key={`logo-2-${index}`}
+              className="flex-shrink-0 w-24 h-10 flex items-center justify-center opacity-80 hover:opacity-100 transition-opacity"
+            >
+              <Image
+                src={logo}
+                alt={`Company Logo ${index + 1}`}
+                width={70}
+                height={25}
+                className="object-contain max-h-full max-w-full"
+              />
+            </div>
+          ))}
+        </motion.div>
+      </div>
+      
+      {/* Fading effect on edges */}
+      <div className="absolute inset-y-0 left-0 w-16 bg-gradient-to-r from-gray-100 to-transparent pointer-events-none" />
+      <div className="absolute inset-y-0 right-0 w-16 bg-gradient-to-l from-gray-100 to-transparent pointer-events-none" />
     </div>
   );
 }
