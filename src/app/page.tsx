@@ -6,6 +6,7 @@ import { cn } from "@/lib/utils";
 import React, { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ArrowRight } from "lucide-react";
+import { motion } from "framer-motion";
 
 import { ThreeDMarquee } from "@/components/ui/3d-marquee";
 
@@ -20,6 +21,8 @@ import {
   IconFlag, 
   IconBuilding 
 } from "@tabler/icons-react";
+import { StickyScroll } from "@/components/ui/sticky-scroll-reveal";
+import { InfiniteMovingCards } from "@/components/ui/infinite-moving-cards";
 
 const items = [
   { title: "Home", icon: <IconHome />, href: "/" },
@@ -75,6 +78,87 @@ const companyLogos = [
 
 ];
 
+const content = [
+  {
+    title: "Collaborative Editing",
+    description:
+      "Work together in real time with your team, clients, and stakeholders. Collaborate on documents, share ideas, and make decisions quickly. With our platform, you can streamline your workflow and increase productivity.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
+        Collaborative Editing
+      </div>
+    ),
+  },
+  {
+    title: "Real time changes",
+    description:
+      "See changes as they happen. With our platform, you can track every modification in real time. No more confusion about the latest version of your project. Say goodbye to the chaos of version control and embrace the simplicity of real-time updates.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center text-white">
+        <Image
+          src="/linear.webp"
+          width={300}
+          height={300}
+          className="h-full w-full object-cover"
+          alt="linear board demo"
+        />
+      </div>
+    ),
+  },
+  {
+    title: "Version control",
+    description:
+      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--orange-500),var(--yellow-500))] text-white">
+        Version control
+      </div>
+    ),
+  },
+  {
+    title: "Running out of content",
+    description:
+      "Experience real-time updates and never stress about version control again. Our platform ensures that you're always working on the most recent version of your project, eliminating the need for constant manual updates. Stay in the loop, keep your team aligned, and maintain the flow of your work without any interruptions.",
+    content: (
+      <div className="flex h-full w-full items-center justify-center bg-[linear-gradient(to_bottom_right,var(--cyan-500),var(--emerald-500))] text-white">
+        Running out of content
+      </div>
+    ),
+  },
+];
+
+const testimonials = [
+  {
+    quote:
+      "It was the best of times, it was the worst of times, it was the age of wisdom, it was the age of foolishness, it was the epoch of belief, it was the epoch of incredulity, it was the season of Light, it was the season of Darkness, it was the spring of hope, it was the winter of despair.",
+    name: "Charles Dickens",
+    title: "A Tale of Two Cities",
+  },
+  {
+    quote:
+      "To be, or not to be, that is the question: Whether 'tis nobler in the mind to suffer The slings and arrows of outrageous fortune, Or to take Arms against a Sea of troubles, And by opposing end them: to die, to sleep.",
+    name: "William Shakespeare",
+    title: "Hamlet",
+  },
+  {
+    quote: "All that we see or seem is but a dream within a dream.",
+    name: "Edgar Allan Poe",
+    title: "A Dream Within a Dream",
+  },
+  {
+    quote:
+      "It is a truth universally acknowledged, that a single man in possession of a good fortune, must be in want of a wife.",
+    name: "Jane Austen",
+    title: "Pride and Prejudice",
+  },
+  {
+    quote:
+      "Call me Ishmael. Some years ago—never mind how long precisely—having little or no money in my purse, and nothing particular to interest me on shore, I thought I would sail about a little and see the watery part of the world.",
+    name: "Herman Melville",
+    title: "Moby-Dick",
+  },
+];
+
 export default function Home() {
   return (
     <div className="relative min-h-[200vh]">
@@ -120,8 +204,8 @@ export default function Home() {
         </div>
 
         {/* Slim div for company logos */}
-        <div className="w-full bg-gray-100 py-6">
-          <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-6">
+        <div className="w-full bg-gray-100 py-8">
+          <div className="max-w-7xl mx-auto px-4 flex flex-wrap justify-center gap-7">
             {companyLogos.map((logo, index) => (
               <img
                 key={index}
@@ -139,63 +223,71 @@ export default function Home() {
             <h2 className="text-4xl font-bold text-indigo-900 mb-8 text-center">Our Services</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
               {/* Service cards */}
-              <div className="bg-gray-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                <div className="bg-indigo-100 p-4 rounded-lg mb-4">
-                  <IconBriefcase className="w-10 h-10 text-indigo-600" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">PLM Services</h3>
-                <p className="text-gray-600 mb-6">
-                  Comprehensive enterprise solutions tailored to your business needs, ensuring seamless integration with your existing infrastructure.
-                </p>
-                <Button className="mt-auto" variant="outline">
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-
-              <div className="bg-gray-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                <div className="bg-indigo-100 p-4 rounded-lg mb-4">
-                  <IconUsers className="w-10 h-10 text-indigo-600" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">Managed IT Services</h3>
-                <p className="text-gray-600 mb-6">
-                  Expert consulting to guide your digital transformation journey. Our team of professionals will help you navigate the complexities of modern IT.
-                </p>
-                <Button className="mt-auto" variant="outline">
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-
-              <div className="bg-gray-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center">
-                <div className="bg-indigo-100 p-4 rounded-lg mb-4">
-                  <IconInfoCircle className="w-10 h-10 text-indigo-600" />
-                </div>
-                <h3 className="text-xl font-bold mb-2">MENDIX Services</h3>
-                <p className="text-gray-600 mb-6">
-                  End-to-end implementation support ensuring your software solutions are deployed efficiently with minimal disruption to your operations.
-                </p>
-                <Button className="mt-auto" variant="outline">
-                  Learn More
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
+              {[
+                {
+                  title: "PLM Services",
+                  description:
+                    "Comprehensive enterprise solutions tailored to your business needs, ensuring seamless integration with your existing infrastructure.",
+                  icon: <IconBriefcase className="w-10 h-10 text-indigo-600" />,
+                },
+                {
+                  title: "Managed IT Services",
+                  description:
+                    "Expert consulting to guide your digital transformation journey. Our team of professionals will help you navigate the complexities of modern IT.",
+                  icon: <IconUsers className="w-10 h-10 text-indigo-600" />,
+                },
+                {
+                  title: "MENDIX Services",
+                  description:
+                    "End-to-end implementation support ensuring your software solutions are deployed efficiently with minimal disruption to your operations.",
+                  icon: <IconInfoCircle className="w-10 h-10 text-indigo-600" />,
+                },
+              ].map((service, index) => (
+                <motion.div
+                  key={index}
+                  whileHover={{
+                    scale: 1.05,
+                    translateY: -10,
+                    boxShadow: "0px 10px 20px rgba(0, 0, 0, 0.2)",
+                  }}
+                  transition={{ type: "spring", stiffness: 300, damping: 20 }}
+                  className="bg-gray-50 p-6 rounded-lg shadow-md flex flex-col items-center text-center"
+                >
+                  <div className="bg-indigo-100 p-4 rounded-lg mb-4">{service.icon}</div>
+                  <h3 className="text-xl font-bold mb-2">{service.title}</h3>
+                  <p className="text-gray-600 mb-6">{service.description}</p>
+                  <Button className="mt-auto" variant="outline">
+                    Learn More
+                    <ArrowRight className="ml-2 h-4 w-4" />
+                  </Button>
+                </motion.div>
+              ))}
             </div>
           </div>
         </div>
-        
-        {/* Another section for more scroll space */}
-        <div className="w-full bg-indigo-50 py-32">
-          <div className="max-w-7xl mx-auto px-4" >
-            <h2 className="text-4xl font-bold text-indigo-900 mb-8 text-center">About PLMITPro</h2>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto text-center mb-8">
-              We specialize in PLM Services, managed IT services and Mendix Services. Our commitment is to offer tailored solutions that precisely align with our clients' needs, ensuring top-notch quality, robust security, and cost-effective operations. We provide Managed Services and consulting services.
-            </p>
-            <p className="text-lg text-gray-700 max-w-3xl mx-auto text-center">
-              By leveraging cutting-edge technologies and industry best practices, we empower businesses to thrive in today's competitive landscape. Our team is dedicated to crafting innovative solutions that streamline processes, enhance efficiency, and ultimately contribute to our clients' success.
-            </p>
+
+        {/* Sticky Scroll Section with Left Box */}
+        <div className="w-full bg-indigo-50 py-20">
+          <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-start gap-10">
+            {/* Left Box */}
+            <div className="flex-1 bg-indigo-100 rounded-lg p-8 shadow-md flex flex-col justify-center items-center h-[30rem]">
+              <h3 className="text-3xl font-bold text-indigo-900 mb-4 text-center">Check out our AI services</h3>
+              <p className="text-gray-700 mb-6 text-center">
+                Discover how our cutting-edge AI solutions can transform your business. From predictive analytics to intelligent automation, we have you covered.
+              </p>
+              <Button className="text-lg px-6 py-4 bg-white text-indigo-900 hover:bg-indigo-200" variant="outline">
+                Learn More
+                <ArrowRight className="ml-3 h-5 w-5" />
+              </Button>
+            </div>
+
+            {/* Sticky Scroll Component */}
+            <div className="flex-1 h-[30rem] shadow-md rounded-lg">
+              <StickyScroll content={content} />
+            </div>
           </div>
         </div>
+
       </main>
       
       {/* Footer section */}
