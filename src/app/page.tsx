@@ -597,17 +597,17 @@ function CompanyLogosCarousel({ logos }: { logos: string[] }) {
         <motion.div
           className="flex space-x-6"
           animate={{
-            x: "-100%"
+            x: "100%" // Changed from "-100%" to "100%" to reverse direction
           }}
           transition={{
             repeat: Infinity,
-            duration: 40, // Slower animation
+            duration: 40,
             ease: "linear",
             repeatType: "loop",
             repeatDelay: 0
           }}
           style={{
-            willChange: "transform" // Performance optimization
+            willChange: "transform"
           }}
         >
           {extendedLogos.map((logo, index) => (
@@ -629,17 +629,17 @@ function CompanyLogosCarousel({ logos }: { logos: string[] }) {
         {/* Second animation container that seamlessly continues where the first one ends */}
         <motion.div
           className="flex space-x-6 absolute left-0"
-          initial={{ x: "100%" }}
+          initial={{ x: "-100%" }} // Changed from "100%" to "-100%"
           animate={{ x: "0%" }}
           transition={{
             repeat: Infinity,
-            duration: 40, // Same duration
+            duration: 40,
             ease: "linear",
             repeatType: "loop",
             repeatDelay: 0
           }}
           style={{
-            willChange: "transform" // Performance optimization
+            willChange: "transform"
           }}
         >
           {extendedLogos.map((logo, index) => (
