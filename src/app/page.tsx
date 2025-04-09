@@ -186,14 +186,14 @@ export default function Home() {
   }, []);
 
   return (
-    <div className="relative min-h-[200vh]">
+    <div className="relative min-h-screen">
       <Navbar className="top-2" />
       
       {/* Main content container */}
       <main className="relative z-10">
         {/* Hero section */}
         <div ref={contentAboveRef} className="relative w-full">
-          <div className="relative h-[90vh] flex flex-col items-center justify-center overflow-hidden"> {/* Reduced height */}
+          <div className="relative h-full flex flex-col items-center justify-center overflow-hidden">
             {/* Solid background color */}
             <div className="absolute inset-0 bg-[#162F62] z-0"></div>
             
@@ -212,9 +212,9 @@ export default function Home() {
             </div>
             
             {/* Content overlay */}
-            <div className="relative z-10 flex flex-col items-center w-full max-w-7xl mx-auto px-4 text-center">
+            <div className="relative z-10 flex flex-col items-center w-full max-w-7xl mx-auto px-4 text-center py-8">
               {/* Frosted glass backdrop for text */}
-              <div className="absolute inset-0 -mx- -my-12 bg-gray-800/40 backdrop-blur-sm rounded-xl shadow-lg"></div>
+              <div className="absolute inset-0 -mx-4 -my-8 bg-gray-800/40 backdrop-blur-sm rounded-xl shadow-lg"></div>
               
               <h1 className="relative z-10 text-5xl sm:text-9xl font-bold text-white">PLMITPro</h1>
               <p className="relative z-10 text-3xl font-bold text-indigo-200 mt-4">
@@ -222,7 +222,7 @@ export default function Home() {
                 Seamless Software Implementation
               </p>
 
-              <Button className="relative z-10 mt-12 text-lg px-10 py-7 mx-auto bg-white text-indigo-900 hover:bg-indigo-100" variant="outline">
+              <Button className="relative z-10 mt-8 text-lg px-10 py-7 mx-auto bg-white text-indigo-900 hover:bg-indigo-100" variant="outline">
                 View Our Services
                 <ArrowRight className="ml-3 h-5 w-5" />
               </Button>
@@ -230,21 +230,21 @@ export default function Home() {
           </div>
         </div>
 
-        {/* Company Logos Carousel */}
+        {/* Company Logos Carousel - Now directly under the hero section */}
         <div
           ref={companiesRef}
-          className="w-full bg-gray-100 pt-7 pb-8" // Changed from py-8 to pt-4 pb-8
+          className="w-full bg-gray-100"
         >
-          <div className="max-w-7xl mx-auto px-4">
-            <h3 className="text-center text-lg font-semibold text-gray-700 mb-4 mt-6"> {/* Added mt-6 for more top margin */}
+          <div className="max-w-7xl mx-auto px-4 py-6">
+            <h3 className="text-center text-lg font-semibold text-gray-700 mb-4">
               Companies We Have Worked With
             </h3>
             <CompanyLogosCarousel logos={companyLogos} />
           </div>
         </div>
-              
+
         {/* Add additional content sections to create more scrollable area */}
-        <div className="w-full bg-white py-24">
+        <div className="w-full bg-white py-20">
           <div className="max-w-7xl mx-auto px-4">
             <h2 className="text-4xl font-bold text-indigo-900 mb-8 text-center">Our Services</h2>
             <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -318,8 +318,8 @@ export default function Home() {
         </div>
 
         {/* Statistics Section */}
-        <div className="w-full bg-white py-20">
-          <h2 className="text-4xl font-bold text-indigo-900 mb-12 text-center">Statistics on our development services</h2>
+        <div className="w-full bg-white py-12">
+          <h2 className="text-4xl font-bold text-indigo-900 mb-8 text-center">Statistics on our development services</h2>
           <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {statistics.map((stat, index) => (
               <motion.div
@@ -339,8 +339,8 @@ export default function Home() {
         </div>
 
         {/* Tabular Tech Stack Section */}
-        <div className="w-full bg-gray-200 py-20">
-          <h2 className="text-4xl font-bold text-indigo-900 mb-12 text-center">Our Tech Stack</h2>
+        <div className="w-full bg-gray-200 py-16">
+          <h2 className="text-4xl font-bold text-indigo-900 mb-8 text-center">Our Tech Stack</h2>
           <TabularTechStack />
         </div>
 
@@ -348,7 +348,7 @@ export default function Home() {
         <div className="w-full bg-[#162F62] py-8">
           <h2 className="text-4xl font-bold text-white mb-6 text-center">What Our Clients Say</h2>
           <div className="max-w-7xl mx-auto px-4">
-            <div className="h-[22rem] rounded-2xl flex flex-col antialiased bg-[#1e3b78]/90 dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden">
+            <div className="h-[22rem] rounded-2xl flex flex-col antialiased bg-[#1e3b78]/90 dark:bg-black dark:bg-grid-white/[0.05] items-center justify-center relative overflow-hidden shadow-[inset_0_0_20px_rgba(0,0,0,0.3),inset_0_0_40px_rgba(22,47,98,0.5)]">
               <style jsx global>{`
                 @keyframes scroll {
                   0% {
@@ -375,69 +375,54 @@ export default function Home() {
         </div>
         
         {/* Why Us Section */}
-<div className="w-full bg-white py-20">
-  <h2 className="text-4xl font-bold text-indigo-900 mb-12 text-center">Why Us?</h2>
-  
-  <div className="max-w-7xl mx-auto px-4 flex flex-col lg:flex-row items-center gap-10">
-    {/* Left side text content */}
-    <div className="flex-1">
-      <h3 className="text-3xl font-bold text-indigo-900 mb-6">We Deliver Excellence</h3>
-      <p className="text-gray-700 mb-4">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris. Vivamus hendrerit arcu sed erat molestie vehicula. Sed auctor neque eu tellus rhoncus ut eleifend nibh porttitor. Ut in nulla enim.
-      </p>
-      <p className="text-gray-700 mb-4">
-        Phasellus molestie magna non est bibendum non venenatis nisl tempor. Suspendisse dictum feugiat nisl ut dapibus. Mauris iaculis porttitor posuere. Praesent id metus massa, ut blandit odio.
-      </p>
-      <p className="text-gray-700 mb-8">
-        Aenean eu leo quam. Pellentesque ornare sem lacinia quam venenatis vestibulum. Sed posuere consectetur est at lobortis. Cras mattis consectetur purus sit amet fermentum.
-      </p>
-      <Button className="px-6 py-3 bg-indigo-600 text-white hover:bg-indigo-700">
-        Learn More
-        <ArrowRight className="ml-2 h-4 w-4" />
-      </Button>
-    </div>
-    
-    {/* Right side image with animated border */}
-    <div className="flex-1 flex justify-center items-center">
-      <motion.div
-        className="relative p-2 rounded-lg"
-        initial={{ borderRadius: "25%" }}
-      >
-        <motion.div
-          className="absolute inset-0 rounded-lg"
-          animate={{
-            background: [
-              "linear-gradient(90deg, #007CF0, #00DFD8)",
-              "linear-gradient(180deg, #7928CA, #FF0080)",
-              "linear-gradient(270deg, #FF4D4D, #F9CB28)",
-              "linear-gradient(90deg, #007CF0, #00DFD8)"
-            ],
-            boxShadow: [
-              "0 0 10px rgba(0,124,240,0.5)",
-              "0 0 10px rgba(121,40,202,0.5)",
-              "0 0 10px rgba(255,77,77,0.5)",
-              "0 0 10px rgba(0,124,240,0.5)"
-            ]
-          }}
-          transition={{
-            duration: 8,
-            repeat: Infinity,
-            repeatType: "loop"
-          }}
-        />
-        <div className="relative z-10 overflow-hidden rounded-lg shadow-xl">
-          <Image
-            src="https://assets.aceternity.com/cloudinary_bkp/3d-card.png"
-            alt="Why Choose Us"
-            width={500}
-            height={350}
-            className="object-cover"
-          />
+        <div className="w-full bg-gray-50 py-24">
+          <div className="max-w-7xl mx-auto px-4">
+            <h2 className="text-4xl font-bold text-indigo-900 mb-16 text-center tracking-tight">Why Choose PLMITPRO?</h2>
+            
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+              {/* Left side content */}
+              <div className="space-y-8">
+                <div className="space-y-4">
+                  <h3 className="text-2xl font-semibold text-indigo-900">Expertise You Can Trust</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    With over a decade of experience in enterprise software solutions, we bring unparalleled expertise to every project. Our team of certified professionals ensures your business gets the best possible implementation and support.
+                  </p>
+                </div>
+                
+                <div className="space-y-4">
+                  <h3 className="text-2xl font-semibold text-indigo-900">Global Reach, Local Support</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Operating across multiple continents, we provide 24/7 support to ensure your systems run smoothly. Our local presence means we understand your specific market needs and challenges.
+                  </p>
+                </div>
+                
+                <div className="space-y-4">
+                  <h3 className="text-2xl font-semibold text-indigo-900">Proven Track Record</h3>
+                  <p className="text-gray-600 leading-relaxed">
+                    Our success stories span across industries, with satisfied clients who have seen significant improvements in their operations and efficiency after partnering with us.
+                  </p>
+                </div>
+                
+                <Button className="mt-8 px-8 py-6 bg-[#162F62] hover:bg-[#1e3b78] text-white text-lg font-semibold">
+                  Get Started Today
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </Button>
+              </div>
+              
+              {/* Right side image */}
+              <div className="relative h-[500px] rounded-2xl overflow-hidden shadow-xl">
+                <Image
+                  src="https://images.unsplash.com/photo-1552664730-d307ca884978?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2070&q=80"
+                  alt="Team Collaboration"
+                  fill
+                  className="object-cover"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-r from-indigo-900/80 to-indigo-900/40 mix-blend-multiply" />
+              </div>
+            </div>
+          </div>
         </div>
-      </motion.div>
-    </div>
-  </div>
-</div>
 
       </main>
       

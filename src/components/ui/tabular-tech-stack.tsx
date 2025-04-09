@@ -67,17 +67,17 @@ export const TabularTechStack = () => {
   const [activeTab, setActiveTab] = useState<TabId>("frontend");
 
   return (
-    <div className="max-w-5xl mx-auto bg-gray-300 rounded-lg shadow-lg p-6">
+    <div className="max-w-5xl mx-auto bg-gray-300 rounded-lg shadow-lg p-8">
       {/* Centered container for tabs and icons */}
-      <div className="flex flex-col items-center">
+      <div className="flex flex-col items-center space-y-8">
         {/* Tabs */}
-        <div className="flex flex-wrap justify-center gap-3 mb-6">
+        <div className="flex flex-wrap justify-center gap-4">
           {tabs.map((tab) => (
             <motion.button
               key={tab.id}
               onClick={() => setActiveTab(tab.id)}
               className={`px-6 py-2 rounded-full font-bold ${
-                activeTab === tab.id ? "bg-indigo-600 text-white" : "bg-gray-100 text-gray-700"
+                activeTab === tab.id ? "bg-[#162F62] text-white" : "bg-gray-100 text-gray-700"
               }`}
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.95 }}
@@ -86,6 +86,9 @@ export const TabularTechStack = () => {
             </motion.button>
           ))}
         </div>
+
+        {/* Divider */}
+        <div className="w-3/4 h-px bg-gray-400 mx-auto" />
 
         {/* Icons Panel - Fixed width container to center cards properly */}
         <div className="w-full flex justify-center">
@@ -96,19 +99,19 @@ export const TabularTechStack = () => {
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -10 }}
               transition={{ duration: 0.3 }}
-              className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-2 justify-items-center" // Reduced gap from 3 to 2
+              className="grid grid-cols-1 sm:grid-cols-3 lg:grid-cols-3 gap-4 justify-items-center"
             >
               {techStack[activeTab].map((tech: TechItem, index: number) => (
                 <div
                   key={index}
-                  className="flex flex-col items-center p-1 w-full max-w-[100px]" // Reduced padding and max width
+                  className="flex flex-col items-center p-2 w-full max-w-[120px]"
                 >
                   <Image
                     src={tech.icon}
                     alt={tech.name}
                     width={48}
                     height={48}
-                    className="w-12 h-12 mb-1" // Reduced margin-bottom
+                    className="w-12 h-12 mb-2"
                   />
                   <p className="text-sm font-semibold text-gray-800 text-center">{tech.name}</p>
                 </div>
